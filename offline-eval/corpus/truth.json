@@ -1,0 +1,111 @@
+{
+  "contract": "review-ops.extraction-truth/v1",
+  "classification": "synthetic-hand-authored-not-model-output",
+  "documents": [
+    {"doc_id": "d1-lumora-request", "path": "sources/d1-lumora-request.txt",
+     "sha256": "675cc3bd0d8d3dbad767c426e0871411bb5fe3dac43d14ae2d675f98c5fd5a49",
+     "context": {"start": 190, "end": 604},
+     "context_note": "Message body only (bytes after the first blank line). Headers and other thread messages are outside the boundary. Byte-identical copy of P-M001 source-request.txt."},
+    {"doc_id": "d2-lumora-followup", "path": "sources/d2-lumora-followup.txt",
+     "sha256": "d6e23399eceb28fe355a5e512a6e1868e7aa20c889c64ed443175a9bf56036ac",
+     "context": {"start": 194, "end": 257},
+     "context_note": "Message body only. Reply Subject/From headers are thread-inherited metadata and d1 is NOT included. Byte-identical copy of P-M001 follow-up.txt."},
+    {"doc_id": "d3-corvane-loan", "path": "sources/d3-corvane-loan.txt",
+     "sha256": "151d3c3fba586f35cc21e0b250d7721494ee0de1a362fe2a5d7178d963450691",
+     "context": {"start": 174, "end": 436},
+     "context_note": "Message body only. Standalone message, no thread."},
+    {"doc_id": "d4-pellwick-missing", "path": "sources/d4-pellwick-missing.txt",
+     "sha256": "7794df393208df773629fb492dd611d386b61c1a05827909c9654139a80a0388",
+     "context": {"start": 141, "end": 340},
+     "context_note": "Message body only. Standalone message, no thread."},
+    {"doc_id": "d5-haldren-conflict", "path": "sources/d5-haldren-conflict.txt",
+     "sha256": "546b9fd4f397ca0bceafd5e7e353a1f6baf1c0b1c7cce4ae3f02a5634d4b26dd",
+     "context": {"start": 167, "end": 499},
+     "context_note": "Message body only. Standalone message, no thread."}
+  ],
+  "cases": [
+    {"case_id": "c1-lumora-request", "doc_id": "d1-lumora-request", "fields": {
+      "brand_name": {"status": "known", "value": "Lumora", "reason": null,
+        "evidence": [{"start": 197, "end": 226, "quote": "this is the Lumora press team"}]},
+      "product_name": {"status": "known", "value": "Lumora Arc 2 desk lamp", "reason": null,
+        "evidence": [{"start": 303, "end": 325, "quote": "Lumora Arc 2 desk lamp"}]},
+      "source_type": {"status": "known", "value": "loan", "reason": null,
+        "evidence": [{"start": 273, "end": 298, "quote": "We would like to lend you"}]},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "Source defers the writing deadline; no date given.",
+          "evidence": [{"start": 433, "end": 476, "quote": "We will confirm the writing deadline later."}]},
+        "publish": {"status": "known", "value": "2026-11-20",
+          "reason": "Earliest permitted publish date ('or later'); no latest publish date is stated.",
+          "evidence": [{"start": 382, "end": 432, "quote": "Please publish your review on 2026-11-20 or later."}]},
+        "embargo": {"status": "known", "value": "2026-11-18", "reason": null,
+          "evidence": [{"start": 349, "end": 381, "quote": "The embargo lifts on 2026-11-18."}]},
+        "return_by": {"status": "unknown", "value": null, "reason": "Source says the return date is undecided.",
+          "evidence": [{"start": 477, "end": 518, "quote": "We have not decided on a return date yet."}]}
+      }}},
+    {"case_id": "c2-lumora-followup", "doc_id": "d2-lumora-followup", "fields": {
+      "brand_name": {"status": "unknown", "value": null,
+        "reason": "Body names no brand; 'Lumora' appears only in From/Subject headers, outside the context boundary.",
+        "evidence": []},
+      "product_name": {"status": "unknown", "value": null,
+        "reason": "'the lamp' is not a product name; the full name is only in the inherited Subject header.",
+        "evidence": [{"start": 232, "end": 255, "quote": "the lamp ships tomorrow"}]},
+      "source_type": {"status": "unknown", "value": null, "reason": "Body does not say loan, gift or purchase.", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "Not stated in this message.", "evidence": []},
+        "publish": {"status": "unknown", "value": null, "reason": "Not stated in this message.", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "Not stated in this message.", "evidence": []},
+        "return_by": {"status": "unknown", "value": null,
+          "reason": "'ships tomorrow' is a shipping event, not one of the four deadlines.",
+          "evidence": [{"start": 232, "end": 255, "quote": "the lamp ships tomorrow"}]}
+      }}},
+    {"case_id": "c3-corvane-loan", "doc_id": "d3-corvane-loan", "fields": {
+      "brand_name": {"status": "known", "value": "Corvane", "reason": null,
+        "evidence": [{"start": 178, "end": 190, "quote": "Corvane here"}]},
+      "product_name": {"status": "known", "value": "Corvane Field 40 backpack", "reason": null,
+        "evidence": [{"start": 255, "end": 280, "quote": "Corvane Field 40 backpack"}]},
+      "source_type": {"status": "known", "value": "loan", "reason": null,
+        "evidence": [{"start": 235, "end": 250, "quote": "We can lend you"}]},
+      "deadlines": {
+        "write_by": {"status": "known", "value": "2026-11-24", "reason": null,
+          "evidence": [{"start": 293, "end": 330, "quote": "Please send your draft by 2026-11-24."}]},
+        "publish": {"status": "known", "value": "2026-12-01", "reason": null,
+          "evidence": [{"start": 364, "end": 393, "quote": "Please publish on 2026-12-01."}]},
+        "embargo": {"status": "known", "value": "2026-11-27", "reason": null,
+          "evidence": [{"start": 331, "end": 363, "quote": "The embargo lifts on 2026-11-27."}]},
+        "return_by": {"status": "known", "value": "2026-12-15", "reason": null,
+          "evidence": [{"start": 394, "end": 435, "quote": "Please return the backpack by 2026-12-15."}]}
+      }}},
+    {"case_id": "c4-pellwick-missing", "doc_id": "d4-pellwick-missing", "fields": {
+      "brand_name": {"status": "known", "value": "Pellwick", "reason": null,
+        "evidence": [{"start": 276, "end": 296, "quote": "The team at Pellwick"}]},
+      "product_name": {"status": "unknown", "value": null, "reason": "Only 'something from our new line'; no product named.",
+        "evidence": [{"start": 185, "end": 212, "quote": "something from our new line"}]},
+      "source_type": {"status": "unknown", "value": null, "reason": "No loan/gift/purchase terms stated.", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "No dates in the message.", "evidence": []},
+        "publish": {"status": "unknown", "value": null, "reason": "No dates in the message.", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "No dates in the message.", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "No dates in the message.", "evidence": []}
+      }}},
+    {"case_id": "c5-haldren-conflict", "doc_id": "d5-haldren-conflict", "fields": {
+      "brand_name": {"status": "known", "value": "Haldren", "reason": null,
+        "evidence": [{"start": 167, "end": 185, "quote": "Hello from Haldren"}]},
+      "product_name": {"status": "known", "value": "Haldren Q7 earbuds", "reason": null,
+        "evidence": [{"start": 253, "end": 271, "quote": "Haldren Q7 earbuds"}]},
+      "source_type": {"status": "known", "value": "gift", "reason": "Kept by reviewer; no return requested.",
+        "evidence": [{"start": 272, "end": 303, "quote": "to keep; no need to return them"}]},
+      "deadlines": {
+        "write_by": {"status": "known", "value": "2026-11-28", "reason": null,
+          "evidence": [{"start": 305, "end": 342, "quote": "Please send your draft by 2026-11-28."}]},
+        "publish": {"status": "unknown", "value": null,
+          "reason": "'01/12' has no year and is ambiguous between 12 January and 1 December.",
+          "evidence": [{"start": 474, "end": 498, "quote": "Please publish on 01/12."}]},
+        "embargo": {"status": "unknown", "value": null,
+          "reason": "Two conflicting embargo dates (2026-12-03 vs 2026-12-05); sender says it will confirm.",
+          "evidence": [{"start": 343, "end": 375, "quote": "The embargo lifts on 2026-12-03."},
+                       {"start": 376, "end": 473, "quote": "Our agency calendar says the embargo lifts on 2026-12-05 instead; we will confirm which is right."}]},
+        "return_by": {"status": "unknown", "value": null, "reason": "Gift: source says no return is needed, so no return date exists.",
+          "evidence": [{"start": 272, "end": 303, "quote": "to keep; no need to return them"}]}
+      }}}
+  ]
+}

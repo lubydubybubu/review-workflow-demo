@@ -1,0 +1,12 @@
+From: Ana Ortiz <media@haldren.example>
+To: reviewer@ops.example
+Subject: Haldren Q7 earbuds for review
+Date: 2026-10-29T11:00:00Z
+Message-Id: 0000p-m002-synthetic-5
+
+Hello from Haldren (fictional brand, synthetic P-M002 sample).
+We are sending you the Haldren Q7 earbuds to keep; no need to return them.
+Please send your draft by 2026-11-28.
+The embargo lifts on 2026-12-03.
+Our agency calendar says the embargo lifts on 2026-12-05 instead; we will confirm which is right.
+Please publish on 01/12.

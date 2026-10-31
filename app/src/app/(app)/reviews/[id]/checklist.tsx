@@ -1,0 +1,165 @@
+'use client';
+
+import { useOptimistic, useState, useTransition } from 'react';
+import { IconX } from '@/components/icons';
+import { useToast } from '@/components/toast';
+import { useKeptOwner } from '@/lib/draft-guard';
+import {
+  addChecklistItemAction,
+  deleteChecklistItemAction,
+  toggleChecklistItemAction,
+} from '@/server/actions/reviews';
+import type { ChecklistItem } from '@/server/db/checklist';
+
+type Change = { kind: 'toggle'; id: number; doneAt: string | null } | { kind: 'delete'; id: number };
+
+/**
+ * Each change saves at once. On the detail page the server refresh brings the new items; a caller that
+ * holds the items itself (the quick-edit peek) passes `onItemsChange` and gets just the stored change to
+ * apply to its list (no review reload, so an open review form and its version are left alone).
+ */
+export function Checklist({
+  reviewId,
+  items,
+  readOnly,
+  onItemsChange,
+  onTyping,
+}: {
+  reviewId: number;
+  items: ChecklistItem[];
+  readOnly: boolean;
+  onItemsChange?: (update: (items: ChecklistItem[]) => ChecklistItem[]) => void;
+  /**
+   * In the quick-edit peek: the item being typed is reported here (the peek's own close / switch question and
+   * its registration cover it) instead of being a page input of its own.
+   */
+  onTyping?: (typing: boolean) => void;
+}) {
+  const toast = useToast();
+  const [, startTransition] = useTransition();
+  const [title, setTitle] = useState('');
+  /** an item on its way to the server (the field is cleared at once; it comes back on an error) */
+  const [sending, setSending] = useState<string | null>(null);
+  const typing = title.trim() !== '';
+  // an item typed but not added: on the page, leaving it asks, browser Back / Forward keeps it for this tab, an
+  // ended session carries it to the next sign-in
+  useKeptOwner({
+    label: '체크리스트 항목 추가',
+    scope: 'route',
+    dirty: typing && !onTyping,
+    discard: () => setTitle(''),
+    recovery: onTyping
+      ? undefined
+      : {
+          key: `checklist-add:${reviewId}`,
+          href: `/reviews/${reviewId}`,
+          data: typing ? title : (sending ?? undefined),
+          restore: (data) => {
+            if (typeof data === 'string' && data.length <= 200) setTitle(data);
+          },
+        },
+  });
+  /** told in the same event, so the peek's close question already knows */
+  const changeTitle = (value: string) => {
+    setTitle(value);
+    onTyping?.(value.trim() !== '');
+  };
+  const [list, apply] = useOptimistic(items, (state, change: Change) =>
+    change.kind === 'delete'
+      ? state.filter((i) => i.id !== change.id)
+      : state.map((i) => (i.id === change.id ? { ...i, doneAt: change.doneAt } : i)),
+  );
+  const done = list.filter((i) => i.doneAt).length;
+
+  function run<T>(
+    change: Change,
+    action: () => Promise<{ ok: true; data: T } | { ok: false; error: string }>,
+    stored: (data: T) => (items: ChecklistItem[]) => ChecklistItem[],
+  ) {
+    startTransition(async () => {
+      apply(change);
+      const result = await action();
+      if (!result.ok) toast(result.error, { tone: 'error' });
+      else onItemsChange?.(stored(result.data));
+    });
+  }
+
+  function add(e: React.FormEvent) {
+    e.preventDefault();
+    const value = title.trim();
+    if (!value) return;
+    changeTitle('');
+    setSending(value);
+    startTransition(async () => {
+      const result = await addChecklistItemAction({ reviewId, title: value });
+      setSending(null);
+      if (!result.ok) {
+        changeTitle(value);
+        toast(result.error, { tone: 'error' });
+      } else onItemsChange?.((current) => [...current, result.data]);
+    });
+  }
+
+  return (
+    <section aria-labelledby="checklist-title">
+      <h2 id="checklist-title" className="section-title">
+        체크리스트
+        <span className="text-[12px] font-normal text-muted tabular-nums">
+          {done}/{list.length}
+        </span>
+      </h2>
+      <ul className="mt-1">
+        {list.map((item) => (
+          <li key={item.id} className="group flex items-center gap-2.5 py-1.5 text-[13px]">
+            <input
+              type="checkbox"
+              id={`check-${item.id}`}
+              className="size-4 accent-[var(--accent)]"
+              checked={item.doneAt !== null}
+              disabled={readOnly}
+              onChange={(e) =>
+                run(
+                  { kind: 'toggle', id: item.id, doneAt: e.target.checked ? new Date().toISOString() : null },
+                  () => toggleChecklistItemAction({ itemId: item.id, done: e.target.checked }),
+                  (saved) => (current) => current.map((i) => (i.id === saved.id ? saved : i)),
+                )
+              }
+            />
+            <label htmlFor={`check-${item.id}`} className={`flex-1 ${item.doneAt ? 'text-subtle line-through' : ''}`}>
+              {item.title}
+            </label>
+            {readOnly ? null : (
+              <button
+                type="button"
+                aria-label={`${item.title} 삭제`}
+                className="text-subtle opacity-0 group-hover:opacity-100 hover:text-fg focus-visible:opacity-100"
+                onClick={() =>
+                  run({ kind: 'delete', id: item.id }, () => deleteChecklistItemAction(item.id), () => (current) =>
+                    current.filter((i) => i.id !== item.id),
+                  )
+                }
+              >
+                <IconX className="size-3.5" />
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+      {readOnly ? null : (
+        <form onSubmit={add} className="mt-2">
+          <label htmlFor="check-new" className="sr-only">
+            체크리스트 항목 추가
+          </label>
+          <input
+            id="check-new"
+            className="input h-8 text-[13px]"
+            placeholder="항목 추가 후 Enter"
+            maxLength={200}
+            value={title}
+            onChange={(e) => changeTitle(e.target.value)}
+          />
+        </form>
+      )}
+    </section>
+  );
+}

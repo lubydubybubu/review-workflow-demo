@@ -1,0 +1,25 @@
+# Tests only: no dependency install, no secrets, no publishing step, read-only token.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      # actions/checkout v7.0.1, pinned to the release commit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Python package suite (standard library only)
+        run: python3 -B -m unittest discover -s tests -t .
+      - name: Static simulator tests (Node built-in test runner)
+        run: |
+          node --version
+          node --max-old-space-size=768 --test tests/web-demo/state.test.mjs tests/web-demo/static.test.mjs

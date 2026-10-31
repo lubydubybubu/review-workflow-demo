@@ -1,0 +1,38 @@
+{
+  "contract": "review-ops.replay-set/v1",
+  "classification": "synthetic-hand-authored-not-model-output",
+  "replay_id": "malformed",
+  "predictions": [
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c4-pellwick-missing", "doc_id": "d4-pellwick-missing",
+     "source_sha256": "7794df393208df773629fb492dd611d386b61c1a05827909c9654139a80a0388",
+     "requires_human_approval": 1,
+     "approved": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Pellwick", "reason": null, "evidence": [{"start": 276, "end": 296, "quote": "The team at Pellwick!"}]},
+      "product_name": {"status": "unknown", "value": null, "reason": "no product named", "evidence": []},
+      "source_type": {"status": "unknown", "value": null, "reason": "no terms stated", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "value", "value": "2026-02-30", "reason": null, "evidence": [{"start": true, "end": 296, "quote": "x"}]},
+        "publish": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []}
+      }},
+     "notes": null},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c9-not-in-truth", "doc_id": "d4-pellwick-missing",
+     "source_sha256": "7794df393208df773629fb492dd611d386b61c1a05827909c9654139a80a0388",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "unknown", "value": null, "reason": "x", "evidence": []},
+      "product_name": {"status": "unknown", "value": null, "reason": "x", "evidence": []},
+      "source_type": {"status": "unknown", "value": null, "reason": "x", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "x", "evidence": []},
+        "publish": {"status": "unknown", "value": null, "reason": "x", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "x", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "x", "evidence": []}
+      }},
+     "notes": null}
+  ]
+}

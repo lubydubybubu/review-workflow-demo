@@ -1,0 +1,10 @@
+From: hello@pellwick.example
+To: reviewer@ops.example
+Subject: Collaboration?
+Date: 2026-10-29T10:00:00Z
+Message-Id: 0000p-m002-synthetic-4
+
+Hi there,
+We would love to work with you on something from our new line.
+Let us know if you are interested and we can share details.
+- The team at Pellwick (fictional brand, synthetic P-M002 sample)

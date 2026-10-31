@@ -1,0 +1,21 @@
+{
+  "note": "Expected outcomes of the hand-authored synthetic replay sets. These are fixture checks, not measured model error rates.",
+  "replays": [
+    {"replay_id": "positive", "file": "replays/positive.json", "outcome": "scored",
+     "counts": {"correct": 17, "valid_unknown": 18, "abstained": 0, "false_unknown": 0,
+                "wrong_value": 0, "hallucinated_value": 0, "unsupported_evidence": 0, "missing_prediction": 0},
+     "missing_cases": []},
+    {"replay_id": "deliberately-bad", "file": "replays/bad.json", "outcome": "scored",
+     "counts": {"correct": 4, "valid_unknown": 10, "abstained": 3, "false_unknown": 1,
+                "wrong_value": 2, "hallucinated_value": 5, "unsupported_evidence": 3, "missing_prediction": 7},
+     "missing_cases": ["c3-corvane-loan"]},
+    {"replay_id": "malformed", "file": "replays/malformed.json", "outcome": "rejected",
+     "errors": [
+       "predictions[0].approved: unknown key",
+       "predictions[0].requires_human_approval: must be boolean true",
+       "predictions[0].fields.deadlines.write_by.evidence[0].start: expected non-negative integer",
+       "predictions[0].fields.deadlines.write_by.value: expected YYYY-MM-DD date in 2000..2999",
+       "predictions[1].case_id: 'c9-not-in-truth' is not in truth (extra case)"
+     ]}
+  ]
+}

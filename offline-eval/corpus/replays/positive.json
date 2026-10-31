@@ -1,0 +1,82 @@
+{
+  "contract": "review-ops.replay-set/v1",
+  "classification": "synthetic-hand-authored-not-model-output",
+  "replay_id": "positive",
+  "predictions": [
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c1-lumora-request", "doc_id": "d1-lumora-request",
+     "source_sha256": "675cc3bd0d8d3dbad767c426e0871411bb5fe3dac43d14ae2d675f98c5fd5a49",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Lumora", "reason": null, "evidence": [{"start": 197, "end": 226, "quote": "this is the Lumora press team"}]},
+      "product_name": {"status": "value", "value": "Lumora Arc 2 desk lamp", "reason": null, "evidence": [{"start": 303, "end": 325, "quote": "Lumora Arc 2 desk lamp"}]},
+      "source_type": {"status": "value", "value": "loan", "reason": null, "evidence": [{"start": 273, "end": 298, "quote": "We would like to lend you"}]},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "writing deadline to be confirmed later", "evidence": [{"start": 433, "end": 476, "quote": "We will confirm the writing deadline later."}]},
+        "publish": {"status": "value", "value": "2026-11-20", "reason": "earliest allowed publish date", "evidence": [{"start": 412, "end": 422, "quote": "2026-11-20"}]},
+        "embargo": {"status": "value", "value": "2026-11-18", "reason": null, "evidence": [{"start": 349, "end": 381, "quote": "The embargo lifts on 2026-11-18."}]},
+        "return_by": {"status": "unknown", "value": null, "reason": "return date undecided", "evidence": []}
+      }},
+     "notes": "Source contains an instruction to auto-approve; treated as data. Human approval still required."},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c2-lumora-followup", "doc_id": "d2-lumora-followup",
+     "source_sha256": "d6e23399eceb28fe355a5e512a6e1868e7aa20c889c64ed443175a9bf56036ac",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "unknown", "value": null, "reason": "no brand named in body", "evidence": []},
+      "product_name": {"status": "unknown", "value": null, "reason": "only 'the lamp'", "evidence": []},
+      "source_type": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+        "publish": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "shipping is not a deadline", "evidence": []}
+      }},
+     "notes": null},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c3-corvane-loan", "doc_id": "d3-corvane-loan",
+     "source_sha256": "151d3c3fba586f35cc21e0b250d7721494ee0de1a362fe2a5d7178d963450691",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Corvane", "reason": null, "evidence": [{"start": 178, "end": 190, "quote": "Corvane here"}]},
+      "product_name": {"status": "value", "value": "Corvane Field 40 backpack", "reason": null, "evidence": [{"start": 251, "end": 280, "quote": "the Corvane Field 40 backpack"}]},
+      "source_type": {"status": "value", "value": "loan", "reason": null, "evidence": [{"start": 235, "end": 250, "quote": "We can lend you"}]},
+      "deadlines": {
+        "write_by": {"status": "value", "value": "2026-11-24", "reason": null, "evidence": [{"start": 293, "end": 330, "quote": "Please send your draft by 2026-11-24."}]},
+        "publish": {"status": "value", "value": "2026-12-01", "reason": null, "evidence": [{"start": 364, "end": 393, "quote": "Please publish on 2026-12-01."}]},
+        "embargo": {"status": "value", "value": "2026-11-27", "reason": null, "evidence": [{"start": 352, "end": 362, "quote": "2026-11-27"}]},
+        "return_by": {"status": "value", "value": "2026-12-15", "reason": null, "evidence": [{"start": 394, "end": 435, "quote": "Please return the backpack by 2026-12-15."}]}
+      }},
+     "notes": null},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c4-pellwick-missing", "doc_id": "d4-pellwick-missing",
+     "source_sha256": "7794df393208df773629fb492dd611d386b61c1a05827909c9654139a80a0388",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Pellwick", "reason": null, "evidence": [{"start": 276, "end": 296, "quote": "The team at Pellwick"}]},
+      "product_name": {"status": "unknown", "value": null, "reason": "no product named", "evidence": []},
+      "source_type": {"status": "unknown", "value": null, "reason": "no terms stated", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "publish": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []}
+      }},
+     "notes": null},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c5-haldren-conflict", "doc_id": "d5-haldren-conflict",
+     "source_sha256": "546b9fd4f397ca0bceafd5e7e353a1f6baf1c0b1c7cce4ae3f02a5634d4b26dd",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Haldren", "reason": null, "evidence": [{"start": 167, "end": 185, "quote": "Hello from Haldren"}]},
+      "product_name": {"status": "value", "value": "Haldren Q7 earbuds", "reason": null, "evidence": [{"start": 253, "end": 271, "quote": "Haldren Q7 earbuds"}]},
+      "source_type": {"status": "value", "value": "gift", "reason": null, "evidence": [{"start": 272, "end": 303, "quote": "to keep; no need to return them"}]},
+      "deadlines": {
+        "write_by": {"status": "value", "value": "2026-11-28", "reason": null, "evidence": [{"start": 305, "end": 342, "quote": "Please send your draft by 2026-11-28."}]},
+        "publish": {"status": "unknown", "value": null, "reason": "'01/12' ambiguous, no year", "evidence": [{"start": 474, "end": 498, "quote": "Please publish on 01/12."}]},
+        "embargo": {"status": "unknown", "value": null, "reason": "conflicting dates 2026-12-03 / 2026-12-05", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "gift, no return", "evidence": []}
+      }},
+     "notes": null}
+  ]
+}

@@ -1,0 +1,12 @@
+From: Jonah Reyes <pr@corvane.example>
+To: reviewer@ops.example
+Subject: Corvane Field 40 backpack review loan
+Date: 2026-10-29T09:00:00Z
+Message-Id: 0000p-m002-synthetic-3
+
+Hi, Corvane here (fictional brand, synthetic P-M002 sample).
+We can lend you the Corvane Field 40 backpack for review.
+Please send your draft by 2026-11-24.
+The embargo lifts on 2026-11-27.
+Please publish on 2026-12-01.
+Please return the backpack by 2026-12-15.

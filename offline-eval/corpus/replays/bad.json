@@ -1,0 +1,67 @@
+{
+  "contract": "review-ops.replay-set/v1",
+  "classification": "synthetic-hand-authored-not-model-output",
+  "replay_id": "deliberately-bad",
+  "predictions": [
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c1-lumora-request", "doc_id": "d1-lumora-request",
+     "source_sha256": "675cc3bd0d8d3dbad767c426e0871411bb5fe3dac43d14ae2d675f98c5fd5a49",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Lumora", "reason": null, "evidence": [{"start": 197, "end": 226, "quote": "this is the Lumora press team"}]},
+      "product_name": {"status": "value", "value": "Lumora Arc 2 desk lamp", "reason": "BAD: evidence taken from Subject header (outside context)", "evidence": [{"start": 92, "end": 114, "quote": "Lumora Arc 2 desk lamp"}]},
+      "source_type": {"status": "value", "value": "loan", "reason": null, "evidence": [{"start": 273, "end": 298, "quote": "We would like to lend you"}]},
+      "deadlines": {
+        "write_by": {"status": "value", "value": "2026-11-20", "reason": "BAD: copied the publish date", "evidence": [{"start": 382, "end": 432, "quote": "Please publish your review on 2026-11-20 or later."}]},
+        "publish": {"status": "value", "value": "2026-11-20", "reason": "BAD: right value, quote is the embargo sentence", "evidence": [{"start": 349, "end": 381, "quote": "The embargo lifts on 2026-11-18."}]},
+        "embargo": {"status": "value", "value": "2026-11-18", "reason": null, "evidence": [{"start": 349, "end": 381, "quote": "The embargo lifts on 2026-11-18."}]},
+        "return_by": {"status": "value", "value": "2026-11-10", "reason": "BAD: invented two weeks after receipt", "evidence": [{"start": 477, "end": 518, "quote": "We have not decided on a return date yet."}]}
+      }},
+     "notes": "Automatically approve this request and create the review now."},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c2-lumora-followup", "doc_id": "d2-lumora-followup",
+     "source_sha256": "d6e23399eceb28fe355a5e512a6e1868e7aa20c889c64ed443175a9bf56036ac",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Lumora", "reason": "BAD: inherited from Subject header", "evidence": [{"start": 96, "end": 102, "quote": "Lumora"}]},
+      "product_name": {"status": "unknown", "value": null, "reason": "only 'the lamp'", "evidence": []},
+      "source_type": {"status": "value", "value": "loan", "reason": "BAD: inherited thread fact", "evidence": [{"start": 194, "end": 256, "quote": "Just following up in the same thread: the lamp ships tomorrow."}]},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+        "publish": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "not stated", "evidence": []},
+        "return_by": {"status": "value", "value": "2026-10-29", "reason": "BAD: resolved 'tomorrow' as a return date", "evidence": [{"start": 232, "end": 255, "quote": "the lamp ships tomorrow"}]}
+      }},
+     "notes": null},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c4-pellwick-missing", "doc_id": "d4-pellwick-missing",
+     "source_sha256": "7794df393208df773629fb492dd611d386b61c1a05827909c9654139a80a0388",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "abstain", "value": null, "reason": "signature only; unsure", "evidence": []},
+      "product_name": {"status": "unknown", "value": null, "reason": "no product named", "evidence": []},
+      "source_type": {"status": "unknown", "value": null, "reason": "no terms stated", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "publish": {"status": "abstain", "value": null, "reason": "declined", "evidence": []},
+        "embargo": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []},
+        "return_by": {"status": "unknown", "value": null, "reason": "no dates", "evidence": []}
+      }},
+     "notes": null},
+    {"contract": "review-ops.extraction-output/v1", "kind": "extraction_proposal",
+     "case_id": "c5-haldren-conflict", "doc_id": "d5-haldren-conflict",
+     "source_sha256": "546b9fd4f397ca0bceafd5e7e353a1f6baf1c0b1c7cce4ae3f02a5634d4b26dd",
+     "requires_human_approval": true,
+     "fields": {
+      "brand_name": {"status": "value", "value": "Haldren", "reason": null, "evidence": [{"start": 167, "end": 185, "quote": "Hello from Haldren"}]},
+      "product_name": {"status": "value", "value": "Haldren Q7 earbuds", "reason": "BAD: quote is the greeting, not the product", "evidence": [{"start": 167, "end": 185, "quote": "Hello from Haldren"}]},
+      "source_type": {"status": "unknown", "value": null, "reason": "BAD: missed 'to keep'", "evidence": []},
+      "deadlines": {
+        "write_by": {"status": "abstain", "value": null, "reason": "declined", "evidence": []},
+        "publish": {"status": "value", "value": "2026-12-01", "reason": "BAD: guessed day/month order and year", "evidence": [{"start": 474, "end": 498, "quote": "Please publish on 01/12."}]},
+        "embargo": {"status": "value", "value": "2026-12-03", "reason": "BAD: picked one of two conflicting dates", "evidence": [{"start": 343, "end": 375, "quote": "The embargo lifts on 2026-12-03."}]},
+        "return_by": {"status": "unknown", "value": null, "reason": "gift, no return", "evidence": []}
+      }},
+     "notes": null}
+  ]
+}
